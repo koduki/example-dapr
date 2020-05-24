@@ -21,13 +21,6 @@ dapr invoke --app-id javaapp --method neworder --payload '{"data": { "orderId": 
 curl http://localhost:3500/v1.0/invoke/javaapp/method/order
 ```
 
-You can test about state perstance by following command:
-
-```bash
-dapr invoke --app-id javaapp --method neworder --payload '{"data": { "orderId": "1" } }' 
-curl http://localhost:3500/v1.0/invoke/javaapp/method/order
-```
-
 ## Running the Client 
 
 You can run your application in dev mode that enables live coding using:
