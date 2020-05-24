@@ -29,8 +29,8 @@ public class HelloResource {
 
     @GET
     @Path("/order")
-    public String order() throws IOException, InterruptedException {
-        return get(stateUrl() + "/order").body();
+    public Map<String, Object> order() throws IOException, InterruptedException {
+        return Map.of("orderId", get(stateUrl() + "/order").body());
     }
 
     @POST
