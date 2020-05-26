@@ -15,6 +15,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
+import javax.ws.rs.HeaderParam;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 @Path("/")
@@ -35,8 +38,8 @@ public class HelloResource {
 
     @POST
     @Path("/neworder")
-    public HttpResponse neworder(Map<String, Map<String, Object>> data) throws IOException, InterruptedException {
-        System.out.println("orderId: " + data.get("data").get("orderId"));
+    public HttpResponse neworder(@Context HttpHeaders headers, @HeaderParam("Traceparent") String Traceparent, Map<String, Map<String, Object>> data) throws IOException, InterruptedException {
+        System.out.println("orderId: " + data.get("data").get("orderId") + ", Traceparent: " + Traceparent);        
 
         var items = List.of(Map.of("key", "order", "value", data.get("data").get("orderId")));
         return post(stateUrl(), items);
